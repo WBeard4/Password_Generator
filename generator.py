@@ -27,7 +27,22 @@ def generate_password():
     word = word.title()
     special_char = generate_special_characters()
     number = generate_numbers()
-    password = word + number + special_char
+    
+    # Adding some randomization of the order that the password is formatted in
+    password_format = random.randint(1, 3)
+    if password_format == 1:
+        password = word + number + special_char
+    elif password_format == 2:
+        password = word + special_char + number
+    elif password_format == 3:
+        password = number + word + special_char
+    elif password_format == 4:
+        password = number + special_char + word
+    elif password_format == 5:
+        password = special_char + word + number
+    elif password_format == 6:
+        password = special_char + number + word
+        
     return password.strip().replace('\n', '')
 
 
