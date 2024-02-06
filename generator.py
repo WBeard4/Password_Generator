@@ -1,15 +1,14 @@
 # Password generator that generates passwords of 12 characters, using a real word of at least 8 characters, uppercase, lowercase, number and special character
 
-from random_word import RandomWords
 import random
+import pyperclip
+import nltk # This is used to generate the random word
 
 def generate_word():
-    r = RandomWords()
-    with open('words.txt', 'r') as words:
-        lines = words.readlines()
-    random_word = ()
-    while len(random_word) != 8:
-        random_word = random.choice(lines)
+    nltk.download('words')
+    word_list = nltk.corpus.words.words()
+    eight_letter_words = [word for word in word_list if len(word) == 8]
+    random_word = random.choice(eight_letter_words)
     return random_word
 
 
@@ -32,4 +31,5 @@ def generate_password():
     return password.strip().replace('\n', '')
 
 
-print(generate_password())
+password = generate_password()
+pyperclip.copy(password)
