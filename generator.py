@@ -5,8 +5,11 @@ import pyperclip
 import nltk # This is used to generate the random word
 
 def generate_word():
-    nltk.download('words')
-    word_list = nltk.corpus.words.words()
+    try:
+        word_list = nltk.corpus.words.words()
+    except LookupError:
+        nltk.download('words')
+        word_list = nltk.corpus.words.words()
     eight_letter_words = [word for word in word_list if len(word) == 8]
     random_word = random.choice(eight_letter_words)
     return random_word
